@@ -1,3 +1,4 @@
+//結局このコードを使わず、アセッツのキャラ操作使用
 using UnityEngine;
 
 public class character : MonoBehaviour
@@ -11,29 +12,28 @@ public class character : MonoBehaviour
     private float pitch = 0f;
     private float yaw = 0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
+        //キャラクターコントローラーとカーソル削除
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        //walk and run
+        //wasd移動
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);//shift check
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
         Vector3 move = new Vector3(h,0f,v);
 
-        controller.Move(move * walkspeed * Time.deltaTime);//walk
+        controller.Move(move * walkspeed * Time.deltaTime);
         if(isRunning == true){
-            controller.Move(move * runspeed * Time.deltaTime);//run
+            controller.Move(move * runspeed * Time.deltaTime);
         }
 
-        //Mouse camera
+        //カメラ操作
         float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity;
 
@@ -41,7 +41,7 @@ public class character : MonoBehaviour
         yaw += mouseX;
 
         pitch = Mathf.Clamp(pitch, -90f, 90f);
-        //camera rotation
+        
         cam.rotation = Quaternion.Euler(pitch, yaw, 0f);
     }
 }

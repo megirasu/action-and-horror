@@ -3,7 +3,7 @@ using UnityEngine;
 public class FogChaser : MonoBehaviour
 {
     [SerializeField] private Transform Player;
-    [SerializeField] private float moveSpeed = 2f; // 黒い霧の追いかけるスピード
+    [SerializeField] private float moveSpeed = 2f; 
 
     void Update()
     {
@@ -20,7 +20,5 @@ public class FogChaser : MonoBehaviour
             moveSpeed * Time.deltaTime
         );
 
-        // 常にプレイヤーの方を向かす
-        transform.LookAt(targetPosition);
     }
 }
