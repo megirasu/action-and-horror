@@ -13,8 +13,16 @@ public class lightsphere : MonoBehaviour
     [SerializeField] private float bobbingHeight = 0.3f;
     [SerializeField] private float hoverHeight = 1.5f;
 
+    //後半直進以外に動く変数
+    [SerializeField] private Transform[]Waypoints;
+    [SerializeField] private float WaypointSpeeed = 3f;
+    [SerializeField] private float WaypointDistance = 0.3f;
+
     private float currentSpeed = 0f;//速さ
     private float startY; //記録
+
+    private bool isCliming = false;
+    private int currentIndex = 0;
 
     void Start()
     {
@@ -23,8 +31,19 @@ public class lightsphere : MonoBehaviour
 
     void Update()
     {
+        //waypointを追加するための分岐
         if (Player == null) return;
+
+        if(isCliming == false)
+        {
+            ChaseMove();
+        }else
+        {
+            WaypointMove();
+        } 
+
     //プレイヤーとの距離の処理
+        void ChaseMove(){
         float distToPlayer = Vector3.Distance(transform.position, Player.position);
         if (distToPlayer < runAwayDistance)
         {
@@ -46,5 +65,23 @@ public class lightsphere : MonoBehaviour
         } 
         
         transform.position = pos;
+        }
+
+        void WaypointMove()
+        {
+            if(curreentIndex >= Waypoints.Length)returm;
+
+            transform.target = waypoints[currentIndex];
+            transform.position = Vector3.MoveTowards(
+                transform.positonm,
+                target.position,
+                WaypointSpeeed * Time.deltaTime
+            );
+
+            if(Vector3.Distance(transform.position, target.position) < arriveDinsance)
+            {
+                currentIndex++;
+            }
+        }
     }
 }
