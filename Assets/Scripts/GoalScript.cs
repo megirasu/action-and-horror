@@ -2,18 +2,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using StarterAssets;//third person controllerのスクリプトを使用するため
 
-public class GameoverFog : MonoBehaviour
+public class GoalScript : MonoBehaviour
 {
-    [SerializeField] private GameObject gameoverCanvas;
+    [SerializeField] private GameObject ClearCanvas;
     [SerializeField] private GameObject playerArmature;
-    private bool isGameover = false;
+    private bool isClear = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))//Tagを使用。nameはよくない?
         {
-            gameoverCanvas.SetActive(true);
+            ClearCanvas.SetActive(true);
             playerArmature.GetComponent<CharacterController>().enabled = false;
             playerArmature.GetComponent<ThirdPersonController>().enabled = false;
+            isClear = true;
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,11 +27,12 @@ public class GameoverFog : MonoBehaviour
     void Update()
     {
         // スペース
-        if (isGameover == true && Input.GetKeyDown(KeyCode.Space))
+        if (isClear == true && Input.GetKeyDown(KeyCode.Space))
         {
             // リスタート
             Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.name);
+            
         }
     }
 }

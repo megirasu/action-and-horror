@@ -41,7 +41,7 @@ public class lightsphere : MonoBehaviour
         {
             WaypointMove();
         } 
-
+    }
     //プレイヤーとの距離の処理
         void ChaseMove(){
         float distToPlayer = Vector3.Distance(transform.position, Player.position);
@@ -69,19 +69,36 @@ public class lightsphere : MonoBehaviour
 
         void WaypointMove()
         {
-            if(curreentIndex >= Waypoints.Length)returm;
+            if(currentIndex >= Waypoints.Length)return;
 
-            transform.target = waypoints[currentIndex];
+            float distToPlayer = Vector3.Distance(transform.position, Player.position);
+            if (distToPlayer < runAwayDistance)
+            {
+                currentSpeed = Mathf.MoveTowards(currentSpeed, WaypointSpeeed, acceleration * Time.deltaTime);
+            }
+            else
+            {
+                currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, acceleration * Time.deltaTime);
+            }
+            
+            Transform target = Waypoints[currentIndex];
             transform.position = Vector3.MoveTowards(
-                transform.positonm,
+                transform.position,
                 target.position,
                 WaypointSpeeed * Time.deltaTime
             );
 
-            if(Vector3.Distance(transform.position, target.position) < arriveDinsance)
+            if(Vector3.Distance(transform.position, target.position) < WaypointDistance)
             {
                 currentIndex++;
             }
         }
+
+        private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ClimbStart"))
+        {
+            isCliming = true;
+    }
     }
 }
