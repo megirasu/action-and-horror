@@ -11,6 +11,7 @@ public class GameoverFog : MonoBehaviour
     {
         if (other.CompareTag("Player"))//Tagを使用。nameはよくない?
         {
+            isGameover = true;
             gameoverCanvas.SetActive(true);
             playerArmature.GetComponent<CharacterController>().enabled = false;
             playerArmature.GetComponent<ThirdPersonController>().enabled = false;
