@@ -18,11 +18,18 @@ public class lightsphere : MonoBehaviour
     [SerializeField] private float WaypointSpeeed = 3f;
     [SerializeField] private float WaypointDistance = 0.3f;
 
+    //捕まった後の処理
+    [SerializeField]private Transform finalGoal;
+    [SerializeField]private float finalSpeed;
+
     private float currentSpeed = 0f;//速さ
     private float startY; //記録
 
-    private bool isCliming = false;
+    private bool WayPointStart = false;
     private int currentIndex = 0;
+
+    private bool finalMove = false;
+
 
     void Start()
     {
@@ -34,7 +41,7 @@ public class lightsphere : MonoBehaviour
         //waypointを追加するための分岐
         if (Player == null) return;
 
-        if(isCliming == false)
+        if(WayPointStart == false)
         {
             ChaseMove();
         }else
@@ -44,6 +51,7 @@ public class lightsphere : MonoBehaviour
     }
     //プレイヤーとの距離の処理
         void ChaseMove(){
+            //離れたら止まる
         float distToPlayer = Vector3.Distance(transform.position, Player.position);
         if (distToPlayer < runAwayDistance)
         {
@@ -67,12 +75,28 @@ public class lightsphere : MonoBehaviour
         transform.position = pos;
         }
 
+        //チェックポイントの処理
         void WaypointMove()
         {
-            if(currentIndex >= Waypoints.Length)return;
+            //すべてのチェックポイントを回ったら停止
+            if(currentIndex >= Waypoints.Length)
+        {
 
-            float distToPlayer = Vector3.Distance(transform.position, Player.position);
-            if (distToPlayer < runAwayDistance)
+
+            if(finalMove && finalGoal != null)
+            {
+                transform.position = Vector3.MoveTowards(
+                    transform.position,
+                    finalGoal.position,
+                    finalSpeed * Time.deltaTime
+                );
+            }
+            return;
+        }
+
+            float distancePlayer = Vector3.Distance(transform.position, Player.position);
+
+            if (distancePlayer < runAwayDistance)
             {
                 currentSpeed = Mathf.MoveTowards(currentSpeed, WaypointSpeeed, acceleration * Time.deltaTime);
             }
@@ -83,22 +107,29 @@ public class lightsphere : MonoBehaviour
             
             Transform target = Waypoints[currentIndex];
             transform.position = Vector3.MoveTowards(
-                transform.position,
-                target.position,
-                WaypointSpeeed * Time.deltaTime
+                transform.position,//今の場所
+                target.position,//目的地
+                WaypointSpeeed * Time.deltaTime//一回で進む速さ
             );
-
+            //チェックポイントを数える
             if(Vector3.Distance(transform.position, target.position) < WaypointDistance)
             {
                 currentIndex++;
             }
         }
 
+
         private void OnTriggerEnter(Collider other)
     {
+        //チェックポイントの移動の確認
         if (other.CompareTag("ClimbStart"))
         {
-            isCliming = true;
+            WayPointStart = true;
+        }
     }
+
+    public void Release()
+    {
+        finalMove = true;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerShooter : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform CenterFirePoint;
+ 
     [SerializeField] private Transform firePoint;//球の出る位置。
     [SerializeField] private Camera maincamera;
    
@@ -49,21 +49,12 @@ public class PlayerShooter : MonoBehaviour
 
         void shoot()
     {
-        //カメラの向きに投げる
-        Vector3 ShootDirection = maincamera.transform.forward;
-        GameObject bullet;
-        if(Input.GetMouseButton(1))//右クリックで狙い撃ち
-        {
-             bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity//
-             );
-        }
-        else
-        {
-            bullet = Instantiate(bulletPrefab, CenterFirePoint.position, Quaternion.identity);
-        }
-        
-        
-        bullet.transform.forward  = ShootDirection;
+        Ray ray = maincamera.ScreenPointToRay(new Vector3(Screen.width / 2,  Screen.height / 2, 0));
+        Vector3 targetPoint = ray.GetPoint(1000f);
+
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+
+        bullet.transform.forward = (targetPoint - firePoint.position).normalized;
     }
 //3秒待ってから実行するため、voidではなくIEnumeratorを使う
     System.Collections.IEnumerator Reload(){
