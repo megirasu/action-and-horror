@@ -30,6 +30,8 @@ public class EnemyShooter : MonoBehaviour
     }
     void Shoot()
     {
+        //上を狙う。
+        Vector3 targetPos = player.position + Vector3.up * 1f;
         //playerの方向を求める
         Vector3 direction = (player.position - firepoint.position).normalized;//ベクトルの長さを一つに決める
 

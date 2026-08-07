@@ -22,6 +22,8 @@ public class lightsphere : MonoBehaviour
     [SerializeField]private Transform finalGoal;
     [SerializeField]private float finalSpeed;
 
+    [SerializeField]private GameObject FinalBattleObjects;
+
     private float currentSpeed = 0f;//速さ
     private float startY; //記録
 
@@ -30,10 +32,13 @@ public class lightsphere : MonoBehaviour
 
     private bool finalMove = false;
 
+    private bool finalbattle = false;
+
 
     void Start()
     {
         startY = transform.position.y;
+        FinalBattleObjects.SetActive(false);
     }
 
     void Update()
@@ -81,8 +86,17 @@ public class lightsphere : MonoBehaviour
             //すべてのチェックポイントを回ったら停止
             if(currentIndex >= Waypoints.Length)
         {
+            //敵やUIの有効化
+            if(finalbattle == false)
+            {
+                finalbattle = true;
+                if(FinalBattleObjects != null)
+                {
+                    FinalBattleObjects.SetActive(true);
+                }
+            }
 
-
+            //最後の動き
             if(finalMove && finalGoal != null)
             {
                 transform.position = Vector3.MoveTowards(
@@ -130,6 +144,7 @@ public class lightsphere : MonoBehaviour
 
     public void Release()
     {
+        FinalBattleObjects.SetActive(false);
         finalMove = true;
     }
 }

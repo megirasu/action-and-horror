@@ -19,6 +19,7 @@ public class EnemyBullet : MonoBehaviour
 //当たった時に確認
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("敵の弾が当たった相手：" + other.name);
         //敵かどうか確認し、そうならダメージを受けさせる
         PlayerHP player = other.GetComponent<PlayerHP>();
         if(player != null)
@@ -26,5 +27,6 @@ public class EnemyBullet : MonoBehaviour
             player.TakeDamage(damage);
             Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }

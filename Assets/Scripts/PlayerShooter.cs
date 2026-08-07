@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using TMPro;
 public class PlayerShooter : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
@@ -10,6 +10,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private int maxAmmmo = 7;
     [SerializeField] private float ReloadTime = 3f;
     
+    [SerializeField] private TextMeshProUGUI ammoText;
     private int currentAmmo;
     private bool isReloading = false;
 
@@ -17,6 +18,7 @@ public class PlayerShooter : MonoBehaviour
     void Start()
     {
         currentAmmo = maxAmmmo;
+        UpdateAmmoText();
     }
 
     // Update is called once per frame
@@ -35,6 +37,7 @@ public class PlayerShooter : MonoBehaviour
             {
                 shoot();
                 currentAmmo--;
+                UpdateAmmoText();
 
                 if(currentAmmo <= 0)
                 {
@@ -45,6 +48,14 @@ public class PlayerShooter : MonoBehaviour
             
         }
        
+    }
+    
+    void UpdateAmmoText()
+    {
+        if(ammoText != null)
+        {
+            ammoText.text = currentAmmo + " / " + maxAmmmo; 
+        }
     }
 
         void shoot()
@@ -60,8 +71,13 @@ public class PlayerShooter : MonoBehaviour
 //3秒待ってから実行するため、voidではなくIEnumeratorを使う
     System.Collections.IEnumerator Reload(){
         isReloading = true;
+        if(ammoText != null)
+        {
+            ammoText.text = "Reloading...";
+        }
         yield return new WaitForSeconds(ReloadTime);//3秒待つ
         currentAmmo = maxAmmmo;
+        UpdateAmmoText();
         isReloading = false;
     }
 }
