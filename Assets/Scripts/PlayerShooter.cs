@@ -49,10 +49,11 @@ public class PlayerShooter : MonoBehaviour
 
         void shoot()
     {
-        Ray ray = maincamera.ScreenPointToRay(new Vector3(Screen.width / 2,  Screen.height / 2, 0));
-        Vector3 targetPoint = ray.GetPoint(1000f);
+        //直線で飛ばしたいためRayを使用
+        Ray ray = maincamera.ScreenPointToRay(new Vector3(Screen.width / 2,  Screen.height / 2, 0));//真ん中を指定
+        Vector3 targetPoint = ray.GetPoint(1000f);//適当な遠さ
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);//投げるものの指定
 
         bullet.transform.forward = (targetPoint - firePoint.position).normalized;
     }
