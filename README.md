@@ -37,5 +37,6 @@ Unity で個人制作した 3D アクションゲームです。
 
 ## 使用アセット
 Unity StarterAssets(キャラクター操作・カメラ)
+
 地面・環境テクスチャ:Poly Haven(rocky_terrain、CC0)
 
