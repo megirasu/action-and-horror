@@ -43931,13 +43931,13 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.504
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 134
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -44039,12 +44039,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 67c8b33e424ccdc4486edf538ab91c5a, type: 3}
   - {fileID: 8300000, guid: 274649b0e221539409070ebf6c18918b, type: 3}
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
-  planeSounds:
-  - {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
-  - {fileID: 8300000, guid: b13fd8dee3cf44c40859bf6c987bf68c, type: 3}
-  - {fileID: 8300000, guid: c37138872f61b4418be9e8c1084790ac, type: 3}
-  - {fileID: 8300000, guid: a3da1afec2ee3465db49602a61ef0ec7, type: 3}
-  interval: 0.445
+  interval: 0.5
 --- !u!1001 &2133092532
 PrefabInstance:
   m_ObjectHideFlags: 0

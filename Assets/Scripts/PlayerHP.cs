@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using StarterAssets;
+using UnityEngine.SceneManagement;
 
 public class PlayerHP : MonoBehaviour
 {
@@ -25,7 +26,11 @@ public class PlayerHP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(isDead == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
+        }
     }
 
     public void TakeDamage(int damage)

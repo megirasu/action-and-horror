@@ -4,7 +4,6 @@ public class PlayerShooter : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
  
-    [SerializeField] private Transform firePoint;//球の出る位置。
     [SerializeField] private Camera maincamera;
    
     [SerializeField] private int maxAmmmo = 7;
@@ -63,10 +62,9 @@ public class PlayerShooter : MonoBehaviour
         //直線で飛ばしたいためRayを使用
         Ray ray = maincamera.ScreenPointToRay(new Vector3(Screen.width / 2,  Screen.height / 2, 0));//真ん中を指定
         Vector3 targetPoint = ray.GetPoint(1000f);//適当な遠さ
-
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);//投げるものの指定
-
-        bullet.transform.forward = (targetPoint - firePoint.position).normalized;
+        Vector3 spawnPos = maincamera.transform.position + maincamera.transform.forward * 1.5f;
+        GameObject bullet = Instantiate(bulletPrefab, spawnPos, Quaternion.identity);//投げるものの指定
+        bullet.transform.forward = (targetPoint - spawnPos).normalized;
     }
 //3秒待ってから実行するため、voidではなくIEnumeratorを使う
     System.Collections.IEnumerator Reload(){
