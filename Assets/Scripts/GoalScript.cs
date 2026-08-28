@@ -6,6 +6,9 @@ public class GoalScript : MonoBehaviour
 {
     [SerializeField] private GameObject ClearCanvas;
     [SerializeField] private GameObject playerArmature;
+    [SerializeField] private AudioSource gameBGM;    
+    [SerializeField] private AudioSource goalBGM;   
+
     private bool isClear = false;
     private void OnTriggerEnter(Collider other)
     {
@@ -15,6 +18,8 @@ public class GoalScript : MonoBehaviour
             playerArmature.GetComponent<CharacterController>().enabled = false;
             playerArmature.GetComponent<ThirdPersonController>().enabled = false;
             isClear = true;
+            if (gameBGM != null) gameBGM.Stop();    // ゲーム中の曲を止める
+            if (goalBGM != null) goalBGM.Play();
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

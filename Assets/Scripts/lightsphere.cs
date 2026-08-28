@@ -123,7 +123,7 @@ public class lightsphere : MonoBehaviour
             transform.position = Vector3.MoveTowards(
                 transform.position,//今の場所
                 target.position,//目的地
-                WaypointSpeeed * Time.deltaTime//一回で進む速さ
+                currentSpeed * Time.deltaTime//一回で進む速さ
             );
             //チェックポイントを数える
             if(Vector3.Distance(transform.position, target.position) < WaypointDistance)
