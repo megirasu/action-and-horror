@@ -10,12 +10,17 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private float ReloadTime = 3f;
     
     [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private AudioClip reloadSound;
+
     private int currentAmmo;
     private bool isReloading = false;
+    private AudioSource audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         currentAmmo = maxAmmmo;
         UpdateAmmoText();
     }
@@ -65,6 +70,7 @@ public class PlayerShooter : MonoBehaviour
         Vector3 spawnPos = maincamera.transform.position + maincamera.transform.forward * 1.5f;
         GameObject bullet = Instantiate(bulletPrefab, spawnPos, Quaternion.identity);//投げるものの指定
         bullet.transform.forward = (targetPoint - spawnPos).normalized;
+        audioSource.PlayOneShot(shootSound, 0.5f);
     }
 //3秒待ってから実行するため、voidではなくIEnumeratorを使う
     System.Collections.IEnumerator Reload(){
@@ -72,7 +78,9 @@ public class PlayerShooter : MonoBehaviour
         if(ammoText != null)
         {
             ammoText.text = "Reloading...";
+
         }
+        audioSource.PlayOneShot(reloadSound, 0.5f);
         yield return new WaitForSeconds(ReloadTime);//3秒待つ
         currentAmmo = maxAmmmo;
         UpdateAmmoText();

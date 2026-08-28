@@ -8,6 +8,7 @@ public class GoalScript : MonoBehaviour
     [SerializeField] private GameObject playerArmature;
     [SerializeField] private AudioSource gameBGM;    
     [SerializeField] private AudioSource goalBGM;   
+    [SerializeField] private string titleSceneName = "TitleScene";
 
     private bool isClear = false;
     private void OnTriggerEnter(Collider other)
@@ -34,10 +35,7 @@ public class GoalScript : MonoBehaviour
         // スペース
         if (isClear == true && Input.GetKeyDown(KeyCode.Space))
         {
-            // リスタート
-            Scene currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(currentScene.name);
-            
+        SceneManager.LoadScene(titleSceneName);    
         }
     }
 }
