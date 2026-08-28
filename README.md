@@ -1,5 +1,6 @@
 # Catching Sphere
 ### 作成したスクリプトはすべてAssets/Scriptsに保存しています。
+### Soundsのアセットにある音はオリジナルです。
 
 ## 概要
 Unity で個人制作した 3D アクションゲームです。
