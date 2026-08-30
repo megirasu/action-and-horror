@@ -7,7 +7,7 @@ public class AimSwitch : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        aimCamera.SetActive(false);
+        aimCamera.SetActive(false);//基本は3人称のためスタート時false
     }
 
     // Update is called once per frame

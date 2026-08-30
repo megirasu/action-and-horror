@@ -18,6 +18,7 @@ public class EnemyShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //playerを見て、時間を経過させshootを実行
         if(player == null) return;
         transform.LookAt(player);
         timer += Time.deltaTime;
@@ -30,12 +31,12 @@ public class EnemyShooter : MonoBehaviour
     }
     void Shoot()
     {
-        //上を狙う。
-        Vector3 targetPos = player.position + Vector3.up * 1f;
         //playerの方向を求める
         Vector3 direction = (player.position - firepoint.position).normalized;//ベクトルの長さを一つに決める
-
+        //Enemyはfirepointをフィールドに設定して発射
         GameObject bullet = Instantiate(BulletPrefab, firepoint.position, Quaternion.identity);
+        //回転なしで発射
         bullet.transform.forward = direction;
+        //playerの方向に進ます
     }
 }

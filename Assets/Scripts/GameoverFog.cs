@@ -1,15 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using StarterAssets;//third person controllerのスクリプトを使用するため
+using StarterAssets;
 
 public class GameoverFog : MonoBehaviour
 {
     [SerializeField] private GameObject gameoverCanvas;
     [SerializeField] private GameObject playerArmature;
     private bool isGameover = false;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))//Tagを使用。nameはよくない?
+        if (other.CompareTag("Player"))//Tagを使用。nameはよくない
         {
             isGameover = true;
             gameoverCanvas.SetActive(true);

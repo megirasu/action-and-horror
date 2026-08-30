@@ -16,14 +16,15 @@ public class EnemyMove : MonoBehaviour
     {
          if(player == null)return;
 
-        float distance = Vector3.Distance(transform.position, player.position);
+        float distance = Vector3.Distance(transform.position, player.position);//２点間の距離取得
 
+        //近づいたらゆっくり動き出す。
         if(distance > StopDistance)
         {
             transform.position = Vector3.MoveTowards(
-                transform.position,
-                player.position,
-                moveSpeed * Time.deltaTime
+                transform.position,//今の位置か
+                player.position,//プレイヤーの位置
+                moveSpeed * Time.deltaTime//速度
             );
         }
     }

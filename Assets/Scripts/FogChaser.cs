@@ -8,15 +8,14 @@ public class FogChaser : MonoBehaviour
     void Update()
     {
         if (Player == null) return;
-// プレイヤーの距離
+        // プレイヤーの場所を取得し、playerがジャンプしても飛ばないよう固定。
         Vector3 targetPosition = Player.position;
-        
         targetPosition.y = transform.position.y;
 
         // プレイヤーに向かって一定のスピードで進む
         transform.position = Vector3.MoveTowards(
-            transform.position,
-            targetPosition,
+            transform.position,//現在
+            targetPosition,//目的地
             moveSpeed * Time.deltaTime
         );
 

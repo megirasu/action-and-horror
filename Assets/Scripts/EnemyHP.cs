@@ -12,6 +12,7 @@ public class EnemyHP : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
+
         if(hpBar !=null)
         {
             hpBar.maxValue = maxHP;
@@ -25,8 +26,7 @@ public class EnemyHP : MonoBehaviour
     {
         
     }
-
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage)//playerHpの制御　
     {
         currentHP -= damage;
 

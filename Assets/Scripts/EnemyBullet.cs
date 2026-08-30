@@ -8,25 +8,23 @@ public class EnemyBullet : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Destroy(gameObject, lifetime);
+        Destroy(gameObject, lifetime);//蓄積させないよう、球を消滅させる。
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);//玉の速度
     }
+
 //当たった時に確認
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("敵の弾が当たった相手：" + other.name);
-        //敵かどうか確認し、そうならダメージを受けさせる
-        PlayerHP player = other.GetComponent<PlayerHP>();
+        PlayerHP player = other.GetComponent<PlayerHP>();//ぶつかった相手のPlayerHPをplayerと名付けHPを取得する。
         if(player != null)
         {
             player.TakeDamage(damage);
-            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        Destroy(gameObject);//ものに当たったら消滅するように、プレイヤーでなくても消滅させる。
     }
 }
