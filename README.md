@@ -1,11 +1,12 @@
 # Catching Sphere
 ### 作成したスクリプトはすべてAssets/Scriptsに保存しています。Soundsに関しては作曲も行いました。
-Assets/  
-├── Scripts/       # 作成したスクリプト一式　　
-├── Sounds/        # オリジナル音源　　
-├── Scenes  
-└── Prefabs/  
-
+```
+Assets/
+├── Scripts/    # 作成したスクリプト一式
+├── Sounds/     # オリジナル音源
+├── Scenes/
+└── Prefabs/
+```
 ## 概要
 Unity で個人制作した 3D アクションゲームです。
 プレイヤーは、逃げていく「光」を追いかけながら、背後から迫る「黒い霧」から逃れ、最後は敵との撃ち合いを経てゴールを行うというものです。
