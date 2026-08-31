@@ -37,15 +37,15 @@ public class lightsphere : MonoBehaviour
 
     void Start()
     {
+        //初期値の高さを取得し、最後のボスやオブジェクトを無効
         startY = transform.position.y;
         FinalBattleObjects.SetActive(false);
     }
 
     void Update()
     {
-        //waypointを追加するための分岐
         if (Player == null) return;
-
+        //waypointを追加するための分岐
         if(WayPointStart == false)
         {
             ChaseMove();
@@ -56,7 +56,7 @@ public class lightsphere : MonoBehaviour
     }
     //プレイヤーとの距離の処理
         void ChaseMove(){
-            //離れたら止まる
+        //離れたら止まる
         float distToPlayer = Vector3.Distance(transform.position, Player.position);
         if (distToPlayer < runAwayDistance)
         {
@@ -68,9 +68,9 @@ public class lightsphere : MonoBehaviour
         }
 
         
-        //上下の動きと段差を登らすためのやつ
+        //上下の動きと段差を登らすため
         Vector3 pos = transform.position + transform.forward * currentSpeed * Time.deltaTime;
-
+        //Rayで地面を認識し、地面の高さを基準に上下に移動させる
         if (Physics.Raycast(pos , Vector3.down, out RaycastHit hit, 20f))
         {
             float groundY = hit.point.y;
@@ -96,7 +96,7 @@ public class lightsphere : MonoBehaviour
                 }
             }
 
-            //最後の動き
+            //最後のゴールへ向かうルート
             if(finalMove && finalGoal != null)
             {
                 transform.position = Vector3.MoveTowards(
@@ -108,6 +108,7 @@ public class lightsphere : MonoBehaviour
             return;
         }
 
+            //プレイヤーの位置によって速度を変え、減速して止まる。
             float distancePlayer = Vector3.Distance(transform.position, Player.position);
 
             if (distancePlayer < runAwayDistance)
@@ -119,6 +120,7 @@ public class lightsphere : MonoBehaviour
                 currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, acceleration * Time.deltaTime);
             }
             
+            //ウェイポイント
             Transform target = Waypoints[currentIndex];
             transform.position = Vector3.MoveTowards(
                 transform.position,//今の場所
@@ -142,6 +144,7 @@ public class lightsphere : MonoBehaviour
         }
     }
 
+    //ボスを倒した後オブジェクトとUIを非表示、動きを開始
     public void Release()
     {
         FinalBattleObjects.SetActive(false);

@@ -14,6 +14,7 @@ public class PlayerBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //発射
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 //当たった時に確認

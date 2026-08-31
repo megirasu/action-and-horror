@@ -21,6 +21,7 @@ public class SampleFootsteps : MonoBehaviour
     {
         if(controller.velocity.magnitude > 0.1f && controller.isGrounded)//地面の設置を確認し、その時のみ実行。
         {
+            //一定時間で足音を鳴らす
             timer += Time.deltaTime;
             if(timer >= interval)
             {
@@ -30,11 +31,12 @@ public class SampleFootsteps : MonoBehaviour
         }
          if (plane == false && controller.isGrounded == true)
         {
+            //着地の音
             PlayPlane();
         }
         plane = controller.isGrounded; 
     }
-
+        //それぞれランダムに音を出す
             void PlayFootstep()
         {
             if(footstepSounds.Length == 0)return;

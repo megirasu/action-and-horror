@@ -6,7 +6,7 @@ public class StartScript : MonoBehaviour
 
 public void ChangeScene(string SceneName)
         {
-            SceneManager.LoadScene(SceneName);
+            SceneManager.LoadScene(SceneName);//ロード
             Cursor.lockState = CursorLockMode.Locked;//真ん中に固定
             Cursor.visible = false;//カーソルを非表示
             

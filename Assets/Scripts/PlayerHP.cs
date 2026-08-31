@@ -26,6 +26,7 @@ public class PlayerHP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ゲームオーバー時スペースを押すとリスタート
         if(isDead == true && Input.GetKeyDown(KeyCode.Space))
         {
             Scene currentScene = SceneManager.GetActiveScene();
@@ -50,6 +51,7 @@ public class PlayerHP : MonoBehaviour
 
     void Die()
     {
+        //ゲームオーバー画面を表示し、入力を受けないようにする。
         isDead = true;
         if(gameoverCanvas != null)
         {

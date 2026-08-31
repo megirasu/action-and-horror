@@ -7,13 +7,13 @@ public class GameoverFog : MonoBehaviour
     [SerializeField] private GameObject gameoverCanvas;
     [SerializeField] private GameObject playerArmature;
     private bool isGameover = false;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))//Tagを使用。nameはよくない
         {
             isGameover = true;
-            gameoverCanvas.SetActive(true);
+            gameoverCanvas.SetActive(true);//ゲームオーバー画面
+            //ゲームオーバー時に操作不可
             playerArmature.GetComponent<CharacterController>().enabled = false;
             playerArmature.GetComponent<ThirdPersonController>().enabled = false;
         }
@@ -30,7 +30,7 @@ public class GameoverFog : MonoBehaviour
         // スペース
         if (isGameover == true && Input.GetKeyDown(KeyCode.Space))
         {
-            // リスタート
+            // mainのシーンをリスタート
             Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.name);
         }
