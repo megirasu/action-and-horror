@@ -1,6 +1,6 @@
 # Catching Sphere
 ### 作成したスクリプトはすべてAssets/Scriptsに保存しています。Soundsに関しては作曲家も行いました。
-Assets/
+Assets/  
 ├── Scripts/       # 作成したスクリプト一式　　
 ├── Sounds/        # オリジナル音源　　
 ├── Scenes/  
