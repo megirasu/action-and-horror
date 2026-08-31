@@ -3,7 +3,7 @@
 Assets/  
 ├── Scripts/       # 作成したスクリプト一式　　
 ├── Sounds/        # オリジナル音源　　
-├── Scenes/  
+├── Scenes  
 └── Prefabs/  
 
 ## 概要
